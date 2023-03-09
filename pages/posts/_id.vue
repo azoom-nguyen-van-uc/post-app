@@ -7,13 +7,13 @@
           <v-card-text>{{ posts.body }}</v-card-text>
           <v-card-subtitle> Author: {{ users.username }}</v-card-subtitle>
         </v-card>
-        <v-list>
+        <v-list class="comment">
           <v-subheader>Comments</v-subheader>
           <v-divider></v-divider>
           <v-list-item
             v-for="(comment, index) in comments"
             :key="index"
-            class="comment"
+            class="comment-item"
           >
             <v-list-item-title>{{ comment.email }}</v-list-item-title>
             <v-list-item-subtitle class="comment-body">{{
@@ -51,25 +51,33 @@ export default {
   methods: {
     async getPost() {
       const id = this.$route.params.id
-      const [posts, comments] = await Promise.all([
+
+      if (!id) {
+        this.$router.push('/')
+      }
+
+      const [posts, comments, users] = await Promise.all([
         this.$ky.get(`posts/${id}`).json(),
         this.$ky.get(`posts/${id}/comments`).json(),
+        this.$ky.get(`users`).json(),
       ])
 
       this.posts = posts
       this.comments = comments
-      this.users = await this.$ky.get(`users/${this.posts.userId}`).json()
+      this.users = users.filter((user) => user.id === posts.userId && user)[0]
     },
   },
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .comment {
-  margin-top: 20px;
-}
+  > .comment-item {
+    margin-top: 20px;
+  }
 
-.comment-body {
-  white-space: normal;
+  > .comment-body {
+    white-space: normal;
+  }
 }
 </style>

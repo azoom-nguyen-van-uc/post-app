@@ -37,10 +37,11 @@
     </v-row>
     <v-row>
       <v-col md="12">
-        <nav>
-          <ul v-if="totalPages > 1">
-            <li v-for="page in totalPages" :key="page">
+        <nav class="pagination-list-post">
+          <ul v-if="totalPages > 1" class="list-post">
+            <li v-for="page in totalPages" :key="page" class="item">
               <a
+                class="item-link"
                 :class="{ active: page === currentPage }"
                 @click.prevent="pageChanged(page)"
                 >{{ page }}</a
@@ -145,33 +146,35 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .v-card {
   max-width: 500px !important;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-}
+.pagination-list-post {
+  > .list-post {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
 
-nav ul li {
-  margin: 0 5px;
-}
+    > .item {
+      margin: 0 5px;
 
-nav ul li a {
-  color: #333;
-  text-decoration: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
+      > .item-link {
+        color: #333;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
 
-nav ul li a.active {
-  background-color: #333;
-  color: #fff;
+      > .active {
+        background-color: #333;
+        color: #fff;
+      }
+    }
+  }
 }
 
 .btn-search {

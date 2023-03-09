@@ -52,19 +52,19 @@ export default {
 </script>
 
 <style scoped>
-/* .description-post {
+.description-post {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-} */
+}
 
-/* .author {
+.author {
   padding-bottom: 0;
 }
 
 .action {
   margin-top: 5px;
-} */
+}
 </style>

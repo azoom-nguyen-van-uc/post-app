@@ -45,7 +45,7 @@
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>
-                  <v-btn @click="logout" text>Logout</v-btn>
+                  <v-btn text @click="logout">Logout</v-btn>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>

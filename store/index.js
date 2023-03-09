@@ -7,7 +7,6 @@ import user from './modules/user'
 import post from './modules/post'
 
 const createStore = () => {
-  console.log('Create store successfully')
   return new Vuex.Store({
     plugins: [pathify.plugin],
 
