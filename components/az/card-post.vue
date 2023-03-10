@@ -1,3 +1,28 @@
+<script>
+export default {
+  name: 'CardPost',
+
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    author: {
+      type: String,
+      required: true,
+    },
+  },
+}
+</script>
+
 <template>
   <v-card class="mx-auto my-12" max-width="374">
     <v-card-title>{{ title }}</v-card-title>
@@ -25,31 +50,6 @@
     </v-row>
   </v-card>
 </template>
-
-<script>
-export default {
-  name: 'CompCardPost',
-
-  props: {
-    id: {
-      type: String,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    content: {
-      type: String,
-      required: true,
-    },
-    author: {
-      type: String,
-      required: true,
-    },
-  },
-}
-</script>
 
 <style scoped>
 .description-post {

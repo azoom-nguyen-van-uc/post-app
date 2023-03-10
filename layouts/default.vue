@@ -14,7 +14,7 @@
           <v-icon>mdi-login</v-icon>
         </v-btn>
         <v-menu v-if="userloggedIn" offset-y>
-          <template v-slot:activator="{ on }">
+          <template #activator="{ on }">
             <v-btn text v-on="on">
               {{ username }}
               <v-icon>mdi-menu-down</v-icon>
@@ -35,7 +35,7 @@
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title>
-                  <v-btn text to="/users/edit-profile">Edit profile</v-btn>
+                  <v-btn text to="/users/user-edit-profile">Edit profile</v-btn>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>

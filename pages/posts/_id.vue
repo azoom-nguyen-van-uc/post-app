@@ -1,31 +1,3 @@
-<template>
-  <v-container>
-    <v-row>
-      <v-col cols="12" md="8" offset-md="2">
-        <v-card>
-          <v-card-title>{{ posts.title }}</v-card-title>
-          <v-card-text>{{ posts.body }}</v-card-text>
-          <v-card-subtitle> Author: {{ users.username }}</v-card-subtitle>
-        </v-card>
-        <v-list class="comment">
-          <v-subheader>Comments</v-subheader>
-          <v-divider></v-divider>
-          <v-list-item
-            v-for="(comment, index) in comments"
-            :key="index"
-            class="comment-item"
-          >
-            <v-list-item-title>{{ comment.email }}</v-list-item-title>
-            <v-list-item-subtitle class="comment-body">{{
-              comment.body
-            }}</v-list-item-subtitle>
-          </v-list-item>
-        </v-list>
-      </v-col>
-    </v-row>
-  </v-container>
-</template>
-
 <script>
 export default {
   name: 'PostDetails',
@@ -69,6 +41,34 @@ export default {
   },
 }
 </script>
+
+<template>
+  <v-container>
+    <v-row>
+      <v-col cols="12" md="8" offset-md="2">
+        <v-card>
+          <v-card-title>{{ posts.title }}</v-card-title>
+          <v-card-text>{{ posts.body }}</v-card-text>
+          <v-card-subtitle> Author: {{ users.username }}</v-card-subtitle>
+        </v-card>
+        <v-list class="comment">
+          <v-subheader>Comments</v-subheader>
+          <v-divider></v-divider>
+          <v-list-item
+            v-for="(comment, index) in comments"
+            :key="index"
+            class="comment-item"
+          >
+            <v-list-item-title>{{ comment.email }}</v-list-item-title>
+            <v-list-item-subtitle class="comment-body">{{
+              comment.body
+            }}</v-list-item-subtitle>
+          </v-list-item>
+        </v-list>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
 
 <style scoped lang="scss">
 .comment {

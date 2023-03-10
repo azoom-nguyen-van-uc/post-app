@@ -1,40 +1,3 @@
-<template>
-  <div class="layout-login">
-    <v-card>
-      <v-card-title>Login</v-card-title>
-      <v-card-text>
-        <v-form @submit.prevent="login">
-          <v-text-field
-            v-model.trim="account"
-            :error-messages="validateAccount"
-            label="Email/phone"
-            outlined
-            required
-            @input="$v.account.$touch()"
-            @blur="$v.account.$touch()"
-          ></v-text-field>
-          <v-text-field
-            v-model.trim="password"
-            :error-messages="validatePassword"
-            label="Password"
-            outlined
-            type="password"
-            @input="$v.password.$touch()"
-            @blur="$v.password.$touch()"
-          ></v-text-field>
-          <v-btn type="submit" color="primary">Login</v-btn>
-          <p>
-            Don't have an account!
-            <router-link color="deep-purple lighten-2" text to="/auth/register">
-              Register now</router-link
-            >
-          </p>
-        </v-form>
-      </v-card-text>
-    </v-card>
-  </div>
-</template>
-
 <script>
 import { required, minLength, email } from 'vuelidate/lib/validators'
 import { validationMixin } from 'vuelidate'
@@ -153,6 +116,43 @@ export default {
   },
 }
 </script>
+
+<template>
+  <div class="layout-login">
+    <v-card>
+      <v-card-title>Login</v-card-title>
+      <v-card-text>
+        <v-form @submit.prevent="login">
+          <v-text-field
+            v-model.trim="account"
+            :error-messages="validateAccount"
+            label="Email/phone"
+            outlined
+            required
+            @input="$v.account.$touch()"
+            @blur="$v.account.$touch()"
+          ></v-text-field>
+          <v-text-field
+            v-model.trim="password"
+            :error-messages="validatePassword"
+            label="Password"
+            outlined
+            type="password"
+            @input="$v.password.$touch()"
+            @blur="$v.password.$touch()"
+          ></v-text-field>
+          <v-btn type="submit" color="primary">Login</v-btn>
+          <p>
+            Don't have an account!
+            <router-link color="deep-purple lighten-2" text to="/auth/register">
+              Register now</router-link
+            >
+          </p>
+        </v-form>
+      </v-card-text>
+    </v-card>
+  </div>
+</template>
 
 <style scoped>
 .layout-login {

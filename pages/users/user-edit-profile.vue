@@ -1,71 +1,3 @@
-<template>
-  <div class="layout-login">
-    <v-card>
-      <v-card-title>Edit profile</v-card-title>
-      <v-card-text>
-        <v-form @submit.prevent="register">
-          <v-text-field
-            v-model.trim="username"
-            :error-messages="validateUsername"
-            label="Username"
-            outlined
-            required
-            @input="$v.username.$touch()"
-            @blur="$v.username.$touch()"
-          ></v-text-field>
-          <v-text-field
-            v-model.trim="email"
-            :error-messages="validateEmail"
-            label="Email"
-            outlined
-            required
-            @input="$v.email.$touch()"
-            @blur="$v.email.$touch()"
-          ></v-text-field>
-          <v-text-field
-            v-model.trim="phoneNumber"
-            :error-messages="validatePhoneNumber"
-            label="Phone number"
-            outlined
-            required
-            @input="$v.phoneNumber.$touch()"
-            @blur="$v.phoneNumber.$touch()"
-          ></v-text-field>
-          <v-text-field
-            v-model="dob"
-            :error-messages="validateDoB"
-            label="Date"
-            readonly
-            outlined
-            @blur="$v.dob.$touch()"
-            @click="showDatePicker = true"
-          >
-            <template #append>
-              <v-btn icon @click="showDatePicker = true">
-                <v-icon>mdi-calendar</v-icon>
-              </v-btn>
-            </template>
-          </v-text-field>
-          <v-row justify="center">
-            <v-date-picker
-              v-if="showDatePicker"
-              v-model="dob"
-              @input="showDatePicker = false"
-            ></v-date-picker>
-          </v-row>
-
-          <v-radio-group v-model="gender" :error-messages="validateGender" row>
-            <v-radio label="Male" :value="'male'"></v-radio>
-            <v-radio label="Female" :value="'female'"></v-radio>
-          </v-radio-group>
-
-          <v-btn type="submit" color="primary">Save</v-btn>
-        </v-form>
-      </v-card-text>
-    </v-card>
-  </div>
-</template>
-
 <script>
 import { required, minLength, email } from 'vuelidate/lib/validators'
 import { validationMixin } from 'vuelidate'
@@ -224,6 +156,74 @@ export default {
   },
 }
 </script>
+
+<template>
+  <div class="layout-login">
+    <v-card>
+      <v-card-title>Edit profile</v-card-title>
+      <v-card-text>
+        <v-form @submit.prevent="register">
+          <v-text-field
+            v-model.trim="username"
+            :error-messages="validateUsername"
+            label="Username"
+            outlined
+            required
+            @input="$v.username.$touch()"
+            @blur="$v.username.$touch()"
+          ></v-text-field>
+          <v-text-field
+            v-model.trim="email"
+            :error-messages="validateEmail"
+            label="Email"
+            outlined
+            required
+            @input="$v.email.$touch()"
+            @blur="$v.email.$touch()"
+          ></v-text-field>
+          <v-text-field
+            v-model.trim="phoneNumber"
+            :error-messages="validatePhoneNumber"
+            label="Phone number"
+            outlined
+            required
+            @input="$v.phoneNumber.$touch()"
+            @blur="$v.phoneNumber.$touch()"
+          ></v-text-field>
+          <v-text-field
+            v-model="dob"
+            :error-messages="validateDoB"
+            label="Date"
+            readonly
+            outlined
+            @blur="$v.dob.$touch()"
+            @click="showDatePicker = true"
+          >
+            <template #append>
+              <v-btn icon @click="showDatePicker = true">
+                <v-icon>mdi-calendar</v-icon>
+              </v-btn>
+            </template>
+          </v-text-field>
+          <v-row justify="center">
+            <v-date-picker
+              v-if="showDatePicker"
+              v-model="dob"
+              @input="showDatePicker = false"
+            ></v-date-picker>
+          </v-row>
+
+          <v-radio-group v-model="gender" :error-messages="validateGender" row>
+            <v-radio label="Male" :value="'male'"></v-radio>
+            <v-radio label="Female" :value="'female'"></v-radio>
+          </v-radio-group>
+
+          <v-btn type="submit" color="primary">Save</v-btn>
+        </v-form>
+      </v-card-text>
+    </v-card>
+  </div>
+</template>
 
 <style scoped>
 .layout-login {
