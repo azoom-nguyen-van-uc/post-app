@@ -36,11 +36,11 @@ export default {
     <v-divider class="mx-4"></v-divider>
 
     <v-row>
-      <v-col md="8">
+      <v-col md="6">
         <v-card-title class="author">{{ author }}</v-card-title>
       </v-col>
 
-      <v-col md="4">
+      <v-col md="6">
         <v-card-actions class="action">
           <v-btn color="deep-purple lighten-2" text :to="`/posts/${id}`">
             Xem thêm
@@ -66,5 +66,6 @@ export default {
 
 .action {
   margin-top: 5px;
+  justify-content: right;
 }
 </style>

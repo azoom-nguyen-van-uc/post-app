@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { make } from 'vuex-pathify'
-
 Vue.use(Vuex)
 
 function state() {
   return {
+    listPost: [],
+    users: [],
     posts: [],
     currentPage: 1,
     totalPages: 1,
@@ -14,8 +14,12 @@ function state() {
 }
 
 const mutations = {
-  ...make.mutations(state),
-
+  SET_LIST_POST(state, listPost) {
+    state.listPost = listPost
+  },
+  SET_USERS(state, users) {
+    state.users = users
+  },
   SET_POSTS(state, posts) {
     state.posts = posts
   },
@@ -28,7 +32,7 @@ const mutations = {
 }
 
 const actions = {
-  async getPosts(
+  getPosts(
     { commit },
     {
       page = 1,
@@ -40,8 +44,10 @@ const actions = {
       authorFilter,
     }
   ) {
-    posts = posts !== undefined && (await posts.json())
     posts = [...posts, ...postFirebase]
+
+    commit('SET_LIST_POST', posts)
+    commit('SET_USERS', users)
 
     if (titleFilter) {
       posts = Object.values(posts).filter((post) =>

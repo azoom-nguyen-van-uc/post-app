@@ -77,6 +77,7 @@ export default {
           type: 'success',
         })
         this.$emit('addPost')
+        this.$router.push(`posts/${postFirebaseDocument.id}`)
       } else {
         this.$toast.open({
           message: 'Add post fail!',

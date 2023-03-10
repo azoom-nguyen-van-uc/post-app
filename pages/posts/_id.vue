@@ -28,15 +28,30 @@ export default {
         this.$router.push('/')
       }
 
-      const [posts, comments, users] = await Promise.all([
-        this.$ky.get(`posts/${id}`).json(),
-        this.$ky.get(`posts/${id}/comments`).json(),
-        this.$ky.get(`users`).json(),
-      ])
+      if (!isNaN(id)) {
+        const [posts, comments, users] = await Promise.all([
+          this.$ky.get(`posts/${id}`).json(),
+          this.$ky.get(`posts/${id}/comments`).json(),
+          this.$ky.get(`users`).json(),
+        ])
+        this.posts = posts
+        this.comments = comments
+        this.users = users
+      } else {
+        const [postsDocuments, users] = await Promise.all([
+          this.$store.$fire.firestore
+            .collection('post-management')
+            .doc(id)
+            .get(),
+          this.$ky.get(`users`).json(),
+        ])
+        this.posts = postsDocuments.data()
+        this.users = users
+      }
 
-      this.posts = posts
-      this.comments = comments
-      this.users = users.filter((user) => user.id === posts.userId && user)[0]
+      this.users = this.users.filter(
+        (user) => user.id === this.posts.userId && user
+      )[0]
     },
   },
 }

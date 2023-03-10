@@ -1,5 +1,4 @@
 <script>
-// import { mapGetters } from 'vuex'
 import { get } from 'vuex-pathify'
 
 import CardPost from '~/components/az/card-post'
@@ -28,11 +27,8 @@ export default {
   },
 
   computed: {
-    // ...mapGetters({
-    //   posts: 'posts',
-    //   currentPage: 'currentPage',
-    //   totalPages: 'totalPages',
-    // }),
+    listPost: get('post/listPost'),
+    users: get('post/users'),
     posts: get('post/posts'),
     currentPage: get('post/currentPage'),
     totalPages: get('post/totalPages'),
@@ -47,18 +43,30 @@ export default {
       const titleFilter = this.titleFilter
       const authorFilter = this.authorFilter
       const perPage = 20
-      const [posts, users, postFirebaseDocument] = await Promise.all([
-        this.$ky.get(`posts`),
-        this.$ky.get('users').json(),
-        this.$store.$fire.firestore.collection('post-management').get(),
-      ])
-      const postFirebase = postFirebaseDocument.docs.map((post) => ({
-        id: post.id,
-        ...post.data(),
-      }))
+
+      let posts = this.listPost
+      let users = this.users
+      let postFirebase = []
       let page = !pageChange
         ? Number(this.$router.history.current.query.page)
         : pageChange
+
+      if (this.listPost.length === 0 && this.users.length === 0) {
+        const [postsDocument, usersDocument, postFirebaseDocument] =
+          await Promise.all([
+            this.$ky.get(`posts`).json(),
+            this.$ky.get('users').json(),
+            this.$store.$fire.firestore.collection('post-management').get(),
+          ])
+        const postFirebaseDoc = postFirebaseDocument.docs.map((post) => ({
+          id: post.id,
+          ...post.data(),
+        }))
+
+        posts = postsDocument
+        users = usersDocument
+        postFirebase = postFirebaseDoc
+      }
 
       page = isNaN(page) ? 1 : page
       this.selectAuthor = users
