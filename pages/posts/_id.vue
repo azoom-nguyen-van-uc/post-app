@@ -8,7 +8,7 @@ export default {
     return {
       posts: [],
       comments: [],
-      users: {},
+      users: [],
     }
   },
 
@@ -19,7 +19,7 @@ export default {
   },
 
   computed: {
-    user: get('post/users'),
+    listUser: get('post/users'),
   },
 
   created() {
@@ -33,8 +33,6 @@ export default {
       if (!id) {
         this.$router.push('/')
       }
-
-      this.users = this.user
 
       if (!isNaN(id)) {
         const [posts, comments] = await Promise.all([
@@ -52,7 +50,8 @@ export default {
         this.posts = postsDocuments.data()
       }
 
-      if (this.user.length === 0) {
+      this.users = this.listUser
+      if (this.users.length === 0) {
         this.users = await this.$ky.get(`users`).json()
       }
 
