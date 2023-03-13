@@ -17,6 +17,7 @@ export default {
       titleFilter: '',
       authorFilter: '',
       selectAuthor: [],
+      userDialog: [],
     }
   },
 
@@ -69,6 +70,7 @@ export default {
       }
 
       page = isNaN(page) ? 1 : page
+      this.userDialog = users
       this.selectAuthor = users
       this.selectAuthor.unshift({
         id: null,
@@ -123,7 +125,9 @@ export default {
           >Search</v-btn
         >
       </v-col>
-      <v-col md="2"> <dialog-post @addPost="addPost" /> </v-col>
+      <v-col md="2">
+        <dialog-post :users="userDialog" @addPost="addPost" />
+      </v-col>
     </v-row>
     <v-row v-if="posts">
       <v-col v-for="(post, index) in posts" :key="index" md="4" class="posts">

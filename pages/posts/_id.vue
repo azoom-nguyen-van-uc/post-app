@@ -1,4 +1,6 @@
 <script>
+import { get } from 'vuex-pathify'
+
 export default {
   name: 'PostDetails',
 
@@ -16,6 +18,10 @@ export default {
     }
   },
 
+  computed: {
+    user: get('post/users'),
+  },
+
   created() {
     this.getPost()
   },
@@ -28,25 +34,26 @@ export default {
         this.$router.push('/')
       }
 
+      this.users = this.user
+
       if (!isNaN(id)) {
-        const [posts, comments, users] = await Promise.all([
+        const [posts, comments] = await Promise.all([
           this.$ky.get(`posts/${id}`).json(),
           this.$ky.get(`posts/${id}/comments`).json(),
-          this.$ky.get(`users`).json(),
         ])
         this.posts = posts
         this.comments = comments
-        this.users = users
       } else {
-        const [postsDocuments, users] = await Promise.all([
-          this.$store.$fire.firestore
-            .collection('post-management')
-            .doc(id)
-            .get(),
-          this.$ky.get(`users`).json(),
-        ])
+        const postsDocuments = await this.$store.$fire.firestore
+          .collection('post-management')
+          .doc(id)
+          .get()
+
         this.posts = postsDocuments.data()
-        this.users = users
+      }
+
+      if (this.user.length === 0) {
+        this.users = await this.$ky.get(`users`).json()
       }
 
       this.users = this.users.filter(

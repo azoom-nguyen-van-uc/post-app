@@ -7,6 +7,13 @@ export default {
 
   mixins: [validationMixin],
 
+  props: {
+    users: {
+      type: Array,
+      required: true,
+    },
+  },
+
   validations: {
     title: { required },
     content: { required },
@@ -18,7 +25,6 @@ export default {
     title: '',
     content: '',
     author: '',
-    selectAuthor: [],
   }),
 
   computed: {
@@ -48,10 +54,9 @@ export default {
 
       return errors
     },
-  },
-
-  created() {
-    this.getAuthor()
+    selectAuthor() {
+      return this.users.slice(1)
+    },
   },
 
   methods: {
@@ -85,9 +90,6 @@ export default {
         })
       }
       this.dialog = false
-    },
-    async getAuthor() {
-      this.selectAuthor = await this.$ky.get('users').json()
     },
   },
 }
