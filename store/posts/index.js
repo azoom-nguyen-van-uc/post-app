@@ -1,34 +1,15 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { make } from 'vuex-pathify'
 
-Vue.use(Vuex)
-
-function state() {
-  return {
-    listPost: [],
-    users: [],
-    posts: [],
-    currentPage: 1,
-    totalPages: 1,
-  }
+const state = {
+  listPost: [],
+  users: [],
+  posts: [],
+  currentPage: 1,
+  totalPages: 1,
 }
 
 const mutations = {
-  SET_LIST_POST(state, listPost) {
-    state.listPost = listPost
-  },
-  SET_USERS(state, users) {
-    state.users = users
-  },
-  SET_POSTS(state, posts) {
-    state.posts = posts
-  },
-  SET_CURRENT_PAGE(state, page) {
-    state.currentPage = page
-  },
-  SET_TOTAL_PAGES(state, totalPages) {
-    state.totalPages = totalPages
-  },
+  ...make.mutations(state),
 }
 
 const actions = {

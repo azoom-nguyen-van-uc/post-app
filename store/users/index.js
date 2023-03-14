@@ -1,34 +1,16 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
 import { make } from 'vuex-pathify'
 
-Vue.use(Vuex)
-
-function state() {
-  return {
-    loggedIn: false,
-    username: null,
-    email: null,
-  }
+const state = {
+  loggedIn: false,
+  username: null,
+  email: null,
 }
 
 const mutations = {
   ...make.mutations(state),
-
-  SET_LOGGED_IN(state, loggedIn) {
-    state.loggedIn = loggedIn
-  },
-  SET_USERNAME(state, username) {
-    state.username = username
-  },
-  SET_EMAIL(state, email) {
-    state.email = email
-  },
 }
 
 const actions = {
-  ...make.actions(state),
   setUserLogin({ commit }, { loggedIn, username, email }) {
     localStorage.setItem(
       'userLogin',

@@ -1,21 +1,17 @@
-// use Vuex-pathify
-
 import Vuex from 'vuex'
 import pathify from 'vuex-pathify'
 
-import user from './modules/user'
-import post from './modules/post'
+import userModule from './users/index'
+import postModule from './posts/index'
 
-const createStore = () => {
-  return new Vuex.Store({
+const store = () =>
+  new Vuex.Store({
     plugins: [pathify.plugin],
 
     modules: {
-      user,
-      post,
+      user: userModule,
+      post: postModule,
     },
-    actions: {},
   })
-}
 
-export default createStore
+export default store
